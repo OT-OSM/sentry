@@ -1,0 +1,50 @@
+---
+- hosts: all
+  become: yes
+  remote_user: ansible_ubuntu_demo
+  tasks:
+  #  - name: Create a directory if it does not exist
+  #    ansible.builtin.file:
+  #      path: /home/ubuntu/sentry
+  #      state: directory
+  #      mode: '0755'
+  #  - name: Unarchive a file that needs to be downloaded (added in 2.0)
+  #    unarchive:
+  #      src: https://github.com/getsentry/self-hosted/archive/refs/tags/22.6.0.zip
+  #      dest: /home/ubuntu/sentry
+  #      remote_src: yes   
+  #  - name: Change  
+  #    command: bash install.sh --no-user-prompt 
+  #    args:
+  #      chdir: /home/ubuntu/sentry/self-hosted-22.6.0
+     - name: Generic question with multiple different responses
+       args:
+         chdir: /home/ubuntu/sentry/self-hosted-22.6.0 
+       
+       command: bash install.sh --no-user-prompt
+
+     - name: Run container
+       become: True
+       shell:
+         cmd: "docker-compose run --rm web createuser"
+         chdir: /home/ubuntu/sentry/self-hosted-22.6.0
+
+     - name: Generic question with multiple different responses
+       args:
+         chdir: /home/ubuntu/sentry/self-hosted-22.6.0
+       expect:
+         command: docker-compose run --rm web createuser
+         responses:
+           Question:
+             - "abc@gmail.com"
+             - "12345"
+             - "12345"
+             - "y"   
+             - "y" 
+
+     - name: Run container
+       become: True
+       shell:
+         cmd: "docker-compose up -d"
+         chdir: /home/ubuntu/sentry/self-hosted-22.6.0
+    
