@@ -1,0 +1,14 @@
+---
+- name: Including precheck
+  include_tasks: precheck.yml
+
+- name: Including playbook for docker
+  include_tasks: docker.yml
+  when: docker_valid.changed == false
+
+- name: Including playbook for docker compose
+  include_tasks: dockercompose.yml
+  when: docker_valid.changed == false
+  
+- name: Including playbook for self hosted sentry  
+  include_tasks: sentry.yml

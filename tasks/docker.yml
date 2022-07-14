@@ -1,0 +1,35 @@
+--- 
+- name: Install docker packages
+  apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - ca-certificates
+    - curl
+    - apt-transport-https
+    - software-properties-common
+    - unzip
+
+- name: Add Docker s GPG key for ubuntu from official site
+  apt_key:
+    url: "{{ DockerKey }}"
+    id: "{{ DockerKeyId }}"
+    state: present
+
+- name: Configure Docker for ubuntu stable repository
+  apt_repository:
+    repo: "{{ DockerRepo }}"
+    state: present
+
+- name: Install docker-ce
+  apt:
+    name: docker-ce
+    state: present
+    update_cache: yes
+
+- name: Ensure group "docker" exists with correct gid
+  group:
+    name: "{{ UserName }}"
+    state: present
+   

@@ -1,0 +1,12 @@
+---
+# defaults file for roles/sentry
+
+DockerKey: https://download.docker.com/linux/ubuntu/gpg
+DockerKeyId: 0EBFCD88
+DockerRepo: deb [arch=amd64] https://download.docker.com/linux/ubuntu xenial stable
+
+DockerComposeURL: https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
+
+SentryURL: https://github.com/getsentry/self-hosted/archive/refs/tags/22.6.0.zip
+
+UserName: docker

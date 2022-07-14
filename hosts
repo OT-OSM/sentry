@@ -1,4 +1,0 @@
-#server1 ansible_user=ubuntu ansible_host=172.31.94.52 ansible_ssh_private_key_file=/home/opstr/.ssh/sentry-key.pem
-server2 ansible_user=ubuntu ansible_host=3.111.37.73 ansible_ssh_private_key_file=/home/opstr/Downloads/mumbai.pem
-https://AdityaK1005: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@github.com/OT-OSM/sentry.git
-
