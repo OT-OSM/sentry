@@ -1,0 +1,16 @@
+---
+- name: Install docker-compose from official github repo
+  get_url:
+    url : "{{ DockerComposeURL }}"
+    dest: /usr/local/bin/docker-compose
+    mode: 'u+x,g+x'
+
+- name: Added a consultant whose account you want to expire
+  user:
+    name: "{{ item }}"
+    groups: "{{ UserName }}"
+    append: yes
+  with_items:
+    - ansible_ubuntu_demo
+    - ubuntu
+
